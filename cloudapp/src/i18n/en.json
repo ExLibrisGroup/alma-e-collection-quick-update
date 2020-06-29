@@ -1,7 +1,7 @@
 {
   "Main": {
 		"Intro": "Select the e-collection(s) that you wish to update.",
-		"Update": "Update {count} {count, plural, one{E-Collection} other{E-Collections}}",
+		"Update": "Update {count} {count, plural, =1{E-Collection} other{E-Collections}}",
 		"NoRecords": "This app allows you to quickly update e-collections. Please navigate to a list of e-collections."
 	},
 	"Form": {
@@ -29,8 +29,8 @@
 		},
 		"Results": {
 			"Details": "Details",
-			"Success": "{num} {num, plural, one{e-collection was} other{e-collections were}} updated successfully.",
-			"Failure": "{num} {num, plural, one{e-collection} other{e-collections}} could not be updated."
+			"Success": "{num} {num, plural, =1{e-collection was} other{e-collections were}} updated successfully.",
+			"Failure": "{num} {num, plural, =1{e-collection} other{e-collections}} could not be updated."
 		}
 	},
 	"CheckAll": "Check/Uncheck All",

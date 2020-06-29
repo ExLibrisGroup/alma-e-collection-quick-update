@@ -5,8 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule, LazyTranslateLoader } from '@exlibris/exl-cloudapp-angular-lib';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule, TranslateLoader, TranslateCompiler } from '@ngx-translate/core';
-import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
+import { TranslateModule, TranslateLoader, TranslateParser } from '@ngx-translate/core';
+import { TranslateICUParser } from 'ngx-translate-parser-plural-select';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,15 +25,15 @@ export function getToastrModule() {
 }
 
 export function getTranslateModuleWithICU() {
-   return TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useClass: (LazyTranslateLoader)
-      },
-      compiler: {
-         provide: TranslateCompiler,
-         useClass: TranslateMessageFormatCompiler
-      }
+  return TranslateModule.forRoot({
+    loader: {
+      provide: TranslateLoader,
+      useClass: (LazyTranslateLoader)
+    },
+    parser: {
+      provide: TranslateParser,
+      useClass: TranslateICUParser
+    }
   });
 }
 
