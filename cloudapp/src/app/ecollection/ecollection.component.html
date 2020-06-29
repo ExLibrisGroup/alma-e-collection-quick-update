@@ -1,0 +1,185 @@
+<div class="loading-shade" *ngIf="loading">
+  <mat-progress-spinner 
+    [mode]="percentage >= 0 ? 'determinate' : 'indeterminate'"
+    [value]="percentage"
+    diameter="50"
+    >
+  </mat-progress-spinner>
+</div>
+<div *ngIf="form">
+  <div class="cloudapp-actions">
+    <button mat-flat-button color="secondary" [routerLink]="['']">{{'Cancel' | translate}}</button>
+    <button mat-flat-button color="primary" [disabled]="!isFormValid" (click)="update()">{{'Form.Update' | translate}}</button>
+  </div>
+  <p>{{'Form.Intro' | translate}}</p>
+  <div class="grid" *ngIf="form" [formGroup]="form">
+    <div class="field-title">{{'Form.Fields.InternalDescription' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="internal_description" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.InternalDescription' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="form.get('internal_description')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>
+    <div class="field-title">{{'Form.Fields.ProxyEnabled' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="proxy_enabled.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="form.get('proxy_enabled.value')">
+        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>
+    <div class="field-title">{{'Form.Fields.Free' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="free.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="form.get('free.value')">
+        <mat-radio-button *ngFor="let row of options.isFree" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>
+    <div class="field-title">{{'Form.Fields.ProxySelected' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="proxy" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-form-field>
+        <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
+        <mat-select [formControl]="form.get('proxy')">
+          <mat-option *ngFor="let proxy of options.proxies" [value]="proxy.code">{{proxy.code.concat(proxy.code ? ' (' + proxy.desc + ')' : '')}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>  
+    <div class="field-title">{{'Form.Fields.Category' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="category" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>    
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.Category' | translate}}</mat-label>
+        <input matInput type="text" [formControl]="form.get('category')">
+      </mat-form-field>  
+    </div>
+    <div class="field-title">{{'Form.Fields.AccessType' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="none.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="form.get('access_type.value')">
+        <mat-radio-button *ngFor="let row of options.collectionAccessType" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>
+    <div class="field-title">{{'Form.Fields.CounterPlatform' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="counter_platform.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-form-field>
+        <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
+        <mat-select [formControl]="form.get('counter_platform.value')">
+          <mat-option *ngFor="let row of options.counterPlatform" [value]="row.code">{{row.desc}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>   
+    <div class="field-title">{{'Form.Fields.License' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="license.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-form-field>
+        <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
+        <mat-select [formControl]="form.get('license.value')">
+          <mat-option *ngFor="let license of options.licenses" [value]="license.code">{{license.desc}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>   
+    <div class="field-title">{{'Form.Fields.ActivationDate' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="activation_date" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>    
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.ActivationDate' | translate}}</mat-label>
+        <input matInput [matDatepicker]="activationPicker" [formControl]="form.get('activation_date')">
+        <mat-datepicker-toggle matSuffix [for]="activationPicker"></mat-datepicker-toggle>
+        <mat-datepicker #activationPicker></mat-datepicker>    
+      </mat-form-field>  
+    </div>
+    <div class="field-title">{{'Form.Fields.ExpectedDate' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="expected_activation_date" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>    
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.ExpectedDate' | translate}}</mat-label>
+        <input matInput [matDatepicker]="expectedPicker" [formControl]="form.get('expected_activation_date')">
+        <mat-datepicker-toggle matSuffix [for]="expectedPicker"></mat-datepicker-toggle>
+        <mat-datepicker #expectedPicker></mat-datepicker>    
+      </mat-form-field>  
+    </div>
+  </div>
+</div>
+<div *ngIf="results" class="results">
+  <div>
+    <p *ngIf="results.successCount>0" translate [translateParams]="{num: results.successCount}">Form.Results.Success</p>
+    <p *ngIf="results.failureCount>0" translate [translateParams]="{num: results.failureCount}" style="color: red">Form.Results.Failure</p>
+  </div>
+  <button mat-flat-button routerLink="/" color="accent">{{'OK' | translate}}</button>
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'Form.Results.Details' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li *ngFor="let result of results.details">{{result.msg}}</li>
+    </ul>
+  </mat-expansion-panel>
+</div>

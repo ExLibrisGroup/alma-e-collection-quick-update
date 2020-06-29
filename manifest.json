@@ -1,0 +1,15 @@
+{
+   "id": "exlibrisgroup/alma-e-collection-quick-update",
+   "title": "E-Collection Quick Update",
+   "description": "Currently in BETA. Select from a list of e-collection records, and quickly fields such as internal description, proxy, and activation dates.",
+   "subtitle": "Easily update a list of e-collection records",
+   "author": "Ex Libris",
+   "license": "https://github.com/exlibrisgroup/alma-e-collection-quick-update/blob/master/LICENSE",
+   "icon": {
+      "type": "font",
+      "value": "fa fa-pencil"
+   },
+   "entities": [
+      "IEPA"
+   ]
+}

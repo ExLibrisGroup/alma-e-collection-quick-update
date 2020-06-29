@@ -1,0 +1,53 @@
+
+@import './app/main/main.component.theme';
+
+@mixin themed-styles($theme, $typography) {
+    /* Include themed component mixins or theme dependent styles here */
+    @include main-component-theme($theme, $typography);
+}
+
+@mixin global-styles {
+    /* Add global styles here */
+    /*** 
+    STYLE GUIDE 
+    ***/
+    h1 {
+        font-size: 16px!important;
+        font-weight: 500!important;
+        color: #474747;
+    }
+    h2 {
+        font-size: 14px;
+        font-weight: 400;
+        color: #5e5e5e;
+    }
+    p, li, body,
+    span.mat-checkbox-label {
+        font-size: 14px;
+        font-weight: 300;
+        color: #5e5e5e
+    }
+    a {
+        color: #4164a4
+    }
+    .mat-secondary {
+        background-color: #f2f2f2!important;
+    }
+    .mat-secondary:hover {
+        background-color: #d5d5d5!important;
+    }
+    div.cloudapp-actions {
+        display:flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+    }
+    /*** END STYLE GUIDE **/
+
+    button {
+        margin-right: 10px!important;
+    }
+
+    body {
+        margin-top: 10px!important;
+    }
+}

@@ -1,0 +1,14 @@
+<div *ngIf="entities.length>0 else noEntities">
+  <div class="cloudapp-actions">
+    <button mat-flat-button color="primary" [disabled]="ids.size==0" (click)="update()">{{'Main.Update' | translate:{count: this.ids.size} }}</button>
+  </div>
+  <p translate>Main.Intro</p>
+  <app-select-entities #selectEntities 
+    (entitySelected)="onEntitySelected($event)"
+    [entityList]="entities"
+    [selectedEntities]="ids">
+  </app-select-entities>
+</div>
+<ng-template #noEntities>
+  <p translate>Main.NoRecords</p>
+</ng-template>
