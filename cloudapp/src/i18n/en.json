@@ -1,6 +1,6 @@
 {
   "Main": {
-		"Intro": "Select the e-collection(s) that you wish to update.",
+		"Intro": "Select the e-collection(s) that you wish to update. You can page through the records in Alma and your selection will be remembered.",
 		"Update": "Update {count} {count, plural, =1{E-Collection} other{E-Collections}}",
 		"NoRecords": "This app allows you to quickly update e-collections. Please navigate to a list of e-collections."
 	},
@@ -10,22 +10,25 @@
 		"FailureMessage": "E-Collection ID {id} could not be updated: {message}",
 		"SuccessMessage": "E-Collection ID {id} was successfully updated.",
 		"Fields": {
-			"InternalDescription": "Internal Description",
-			"ProxyEnabled": "Proxy enabled",
-			"Free": "Free",
-			"ProxySelected": "Proxy Selected",
-			"Category": "Category",
-			"AccessType": "Access type",
-			"CounterPlatform": "Counter Platform",
-			"License": "License",
-			"ActivationDate": "Activation Date",
-			"ExpectedDate": "Expected Date"
+			"internal_description": "Internal Description",
+			"proxy_enabled.value": "Proxy enabled",
+			"free.value": "Free",
+			"proxy": "Proxy Selected",
+			"category": "Category",
+			"access_type.value": "Access type",
+			"counter_platform.value": "Counter Platform",
+			"license.value": "License",
+			"activation_date": "Activation Date",
+			"expected_activation_date": "Expected Date"
 		},
 		"Actions": {
 			"none": "None",
 			"clear": "Clear",
 			"append": "Append",
 			"replace": "Replace"
+		},
+		"Validation": {
+			"Required": "{field} is required."
 		},
 		"Results": {
 			"Details": "Details",

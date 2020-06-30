@@ -13,6 +13,14 @@
   font-weight: 400;
 }
 
+.alert-danger {
+  color: red!important;
+}
+
+.alert {
+  padding: 10px 0;
+}
+
 mat-radio-group {
   display: flex;
   flex-direction: column;

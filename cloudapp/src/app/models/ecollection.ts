@@ -14,3 +14,14 @@ export class ECollection {
 export class Value {
   value: string = ""
 }
+
+export interface Actions {
+	[key: string]: FieldActions;
+}
+
+export enum FieldActions {
+  NONE = 'NONE',
+  CLEAR = 'CLEAR',
+  REPLACE = 'REPLACE',
+  APPEND = 'APPEND'
+}
