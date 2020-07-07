@@ -9,7 +9,6 @@
 
 .field-title {
   grid-column: 1 / span 2;
-  font-size: 15px;
   font-weight: 400;
 }
 
@@ -36,17 +35,4 @@ mat-form-field, mat-radio-group {
 
 div.results button {
   margin: 10px 0 20px;
-}
-
-.loading-shade {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

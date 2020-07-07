@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import { SelectEntitiesComponent } from './select-entities/select-entities.component';
 import { EcollectionComponent } from './ecollection/ecollection.component';
+import { OptionsAutoCompleteComponent } from './ecollection/options-autocomplete.component';
 import { DatePipe } from '@angular/common';
 import { OptionsService } from './services/options.service';
 import { EcollectionService } from './services/ecollection.service';
@@ -42,7 +43,8 @@ export function getTranslateModuleWithICU() {
       AppComponent,
       MainComponent,
       SelectEntitiesComponent,
-      EcollectionComponent
+      EcollectionComponent,
+      OptionsAutoCompleteComponent
    ],
    imports: [
       MaterialModule,

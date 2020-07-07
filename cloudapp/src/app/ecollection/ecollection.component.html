@@ -11,6 +11,7 @@
     <button mat-flat-button color="secondary" [routerLink]="['']">{{'Cancel' | translate}}</button>
     <button mat-flat-button color="primary" [disabled]="form.errors!=null" (click)="update()">{{'Main.Update' | translate:{count: this.ids.length} }}</button>
   </div>
+  <h1>Update E-Collections</h1>
   <p>{{'Form.Intro' | translate}}</p>
   <div class="grid" *ngIf="form" [formGroup]="form">
     <div class="field-title">{{'Form.Fields.internal_description' | translate}}</div>
@@ -109,12 +110,12 @@
       </mat-form-field>  
     </div>
     <div> 
-      <mat-form-field>
-        <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
-        <mat-select [formControl]="form.get('counter_platform.value')">
-          <mat-option *ngFor="let row of options.counterPlatform" [value]="row.code">{{row.desc}}</mat-option>
-        </mat-select>
-      </mat-form-field>  
+      <app-options-autocomplete
+        [options]="options.counterPlatform"
+        [placeholder]="'SelectOne' | translate"
+        [control]="form.get('counter_platform.value')"
+        >
+      </app-options-autocomplete>
     </div>   
     <div class="field-title">{{'Form.Fields.license.value' | translate}}</div>
     <div>
@@ -125,12 +126,12 @@
       </mat-form-field>  
     </div>
     <div> 
-      <mat-form-field>
-        <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
-        <mat-select [formControl]="form.get('license.value')">
-          <mat-option *ngFor="let license of options.licenses" [value]="license.code">{{license.desc}}</mat-option>
-        </mat-select>
-      </mat-form-field>  
+      <app-options-autocomplete
+        [options]="options.licenses"
+        [placeholder]="'SelectOne' | translate"
+        [control]="form.get('license.value')"
+        >
+      </app-options-autocomplete>
     </div>   
     <div class="field-title">{{'Form.Fields.activation_date' | translate}}</div>
     <div>
