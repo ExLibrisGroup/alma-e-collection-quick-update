@@ -11,5 +11,8 @@
    },
    "entities": [
       "IEPA"
-   ]
+   ],
+   "pages": {
+      "help": "https://github.com/ExLibrisGroup/alma-e-collection-quick-update/wiki/Help"
+   }
 }
