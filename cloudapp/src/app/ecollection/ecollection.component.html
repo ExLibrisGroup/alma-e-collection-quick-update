@@ -70,6 +70,7 @@
       <mat-form-field>
         <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
         <mat-select [formControl]="form.get('proxy')">
+          <mat-option value='DEFAULT'>DEFAULT</mat-option>
           <mat-option *ngFor="let proxy of options.proxies" [value]="proxy.code">{{proxy.code.concat(proxy.code ? ' (' + proxy.desc + ')' : '')}}</mat-option>
         </mat-select>
       </mat-form-field>  

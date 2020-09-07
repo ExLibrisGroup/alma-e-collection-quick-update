@@ -15,16 +15,20 @@ export interface CodeTable {
 
 export interface Licenses {
   total_record_count: number;
-  license: {
-    code: string;
-    name: string;
-  }[]
+  license: License[]
+}
+
+export interface License {
+  code: string;
+  name: string;
 }
 
 export interface IntegrationProfiles {
   total_record_count: number;
-  integration_profile: {
-    code: string;
-    description: string;
-  }[]
+  integration_profile: IntegrationProfile[]
+}
+
+export interface IntegrationProfile {
+  code: string;
+  description: string;
 }

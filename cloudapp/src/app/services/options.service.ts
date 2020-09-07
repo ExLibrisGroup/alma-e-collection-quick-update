@@ -4,7 +4,7 @@ import { Observable, iif, of, forkJoin } from 'rxjs';
 import { CloudAppRestService, Request } from '@exlibris/exl-cloudapp-angular-lib';
 import { tap, switchMap, map } from 'rxjs/operators';
 import { camelCase, cloneDeep} from 'lodash';
-import { CodeTable, Licenses, IntegrationProfiles } from '../models/alma';
+import { CodeTable, IntegrationProfile, License } from '../models/alma';
 
 @Injectable()
 export class OptionsService {
@@ -19,12 +19,12 @@ export class OptionsService {
     Proxies: {
       uri: '/conf/integration-profiles?type=PROXY_DEFINITION',
       code: 'code',
-      desc: i => i.code.concat(i.description ? ` (${i.description})` : '')
+      desc: (i: IntegrationProfile) => i.code.concat(i.description ? ` (${i.description})` : '')
     },
     Licenses: {
       uri: '/acq/licenses',
       code: 'code',
-      desc: i => i.name
+      desc: (i: License) => i.name
     }
   }
   private _options: Options;
