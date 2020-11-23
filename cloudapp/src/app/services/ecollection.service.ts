@@ -3,6 +3,7 @@ import { CloudAppRestService, HttpMethod } from '@exlibris/exl-cloudapp-angular-
 import { withErrorChecking } from '../models/utils';
 import { ECollection, Actions, FieldActions } from '../models/ecollection';
 import { DatePipe } from '@angular/common';
+import { ElectronicServices } from '../models/eservice';
 
 @Injectable()
 export class EcollectionService {
@@ -16,16 +17,24 @@ export class EcollectionService {
     return withErrorChecking(this.restService.call(`/electronic/e-collections/${id}`));
   }
 
-  update(ecol: any) {
-    return withErrorChecking(this.restService.call({
-      url: `/electronic/e-collections/${ecol.id}`,
-      requestBody: ecol,
-      method: HttpMethod.PUT
-    }), {id: ecol.id});
+  getService(link: string) {
+    return this.restService.call(link);
   }
 
-  merge(orig: any, src: ECollection, actions: Actions) {
-    if (Object.keys(actions).length==0) return; // nothing to do
+  getServices(collectionId: string) {
+    return this.restService.call<ElectronicServices>(`/electronic/e-collections/${collectionId}/e-services`);
+  }
+
+  update(entity: any) {
+    return withErrorChecking(this.restService.call({
+      url: entity.link,
+      requestBody: entity,
+      method: HttpMethod.PUT
+    }), {id: entity.id});
+  }
+
+  merge(orig: any, src: any, actions: Actions) {
+    if (Object.keys(actions).length==0) return orig; // nothing to do
     for (const key of Object.keys(src)) {
       const field = Object.keys(actions).find(name=>key==name.split('.')[0]);
       if (!field || actions[field] == FieldActions.NONE) {
@@ -34,8 +43,8 @@ export class EcollectionService {
         src[key] = orig[key] += `; ${src[key]}`;
       }
     }
-    ['activation_date', 'expected_activation_date'].forEach(f=>this.formatDate(src, f));
-    ['is_suppressed_from_cdi'].forEach(f=>this.formatBoolean(src, f));
+    ['activation_date', 'expected_activation_date', 'service_unavailable_date'].forEach(f=>this.formatDate(src, f));
+    ['is_suppressed_from_cdi', 'activate_new_portfolios'].forEach(f=>this.formatBoolean(src, f));
     return Object.assign(orig, src);
   }
 

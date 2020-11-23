@@ -7,8 +7,8 @@
 	"Form": {
 		"Update": "Update E-Collections",
 		"Intro": "For each field you wish to update, select the action (clear, replace, etc.) and the value of the field.",
-		"FailureMessage": "E-Collection ID {id} could not be updated: {message}",
-		"SuccessMessage": "E-Collection ID {id} was successfully updated.",
+		"FailureMessage": "ID {id} could not be updated: {message}",
+		"SuccessMessage": "ID {id} was successfully updated.",
 		"Fields": {
 			"internal_description": "Internal Description",
 			"proxy_enabled.value": "Proxy enabled",
@@ -23,6 +23,14 @@
 			"expected_activation_date": "Expected Date",
 			"is_selective.value": "We subscribe to only some titles in the collection",
 			"is_suppressed_from_cdi": "Do not show as full text in CDI even if active in Alma"
+		},
+		"ServiceFields": {
+			"internal_description": "Internal Description",
+			"public_description": "Public Description",
+			"activate_new_portfolios": "Activate new portfolios",
+			"service_temporarily_unavailable.value": "Service temporarily unavailable",
+			"service_unavailable_reason": "Service unavailable reason",
+			"service_unavailable_date": "Service unavailable date"
 		},
 		"Actions": {
 			"none": "None",

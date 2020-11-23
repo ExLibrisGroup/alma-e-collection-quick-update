@@ -18,6 +18,10 @@ export class Value {
   value: string = ""
 }
 
+export type FormActions = {
+  [form in 'service' | 'collection']: Actions;
+}
+
 export interface Actions {
 	[key: string]: FieldActions;
 }

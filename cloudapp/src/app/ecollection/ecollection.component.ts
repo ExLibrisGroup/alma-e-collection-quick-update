@@ -3,13 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 import { FormGroupUtil, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
-import { ECollection, FieldActions, Actions } from '../models/ecollection';
+import { ECollection, FieldActions, Actions, FormActions } from '../models/ecollection';
 import { OptionsService } from '../services/options.service';
 import { Options } from '../models/options';
 import { MatSelectChange } from '@angular/material/select'
-import { forkJoin } from 'rxjs';
+import { forkJoin, iif, of } from 'rxjs';
 import { EcollectionService } from '../services/ecollection.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EService, isEService } from '../models/eservice';
 
 @Component({
   selector: 'app-ecollection',
@@ -20,8 +21,9 @@ export class EcollectionComponent implements OnInit {
   loading = false;
   percentage = -1;
   form: FormGroup;
+  serviceForm: FormGroup;
   options: Options;
-  actions: Actions = {};
+  actions: FormActions = {service: {}, collection: {}};
   ids: string[];
   results: Results;
 
@@ -42,27 +44,33 @@ export class EcollectionComponent implements OnInit {
     .subscribe({
       next: results => {
         this.options = results;
-        this.form = FormGroupUtil.toFormGroup(new ECollection);
+        this.form = FormGroupUtil.toFormGroup(new ECollection());
         this.form.setValidators(this.validateForm);
         for (let control in this.form.controls) {
           this.form.controls[control].disable();
         }
+        this.serviceForm = FormGroupUtil.toFormGroup(new EService());
+        this.serviceForm.setValidators(this.validateForm);
+        for (let control in this.serviceForm.controls) {
+          this.serviceForm.controls[control].disable();
+        }        
       },
       error: e => this.alert.error('An error occurred: ', e.message)
     });
   }
 
-  toggle(event: MatSelectChange) {
+  toggle(event: MatSelectChange, entity: string = 'collection') {
     const fieldName = event.source.trigger.nativeElement.parentElement.dataset.action;
-    const field = this.form.get(fieldName);
-    this.actions[fieldName] = event.value;
+    const form = event.source._parentFormGroup.form;
+    const field = form.get(fieldName);
+    this.actions[entity][fieldName] = event.value;
     if ([FieldActions.NONE, FieldActions.CLEAR].includes(event.value)) {
       field.setValue(null);
       field.disable();
     } else {
       field.enable();
     }
-    this.form.setErrors(this.validateForm(this.form));
+    form.setErrors(this.validateForm(form));
   }
 
   update() {
@@ -98,22 +106,37 @@ export class EcollectionComponent implements OnInit {
   }
 
   updateECollection(body: any) {
-    return this.ecollectionService.update(body)
-    .pipe(tap(()=>this.percentage += (1/this.ids.length)*50));
+    /* Update Services */
+    return iif(() => Object.keys(this.actions.service).length > 0,
+      this.ecollectionService.getServices(body.id).pipe(
+        map(resp=>resp.electronic_service.map(orig=>this.mergeEService(orig))),
+        switchMap(resp=>forkJoin(resp.map(serv=>this.ecollectionService.update(serv)))),
+      ),
+      of(null)
+    ).pipe(
+      switchMap(resp=>iif(()=>resp.isError, resp, this.ecollectionService.update(body))),
+      tap(()=>this.percentage += (1/this.ids.length)*50)
+    )
+  }
+
+  mergeEService(orig: any) {
+    const src: EService = this.serviceForm.getRawValue();
+    return this.ecollectionService.merge(orig, src, this.actions.service);
   }
 
   mergeECollection(orig: any) {
     const src: ECollection = this.form.getRawValue();
-    return this.ecollectionService.merge(orig, src, this.actions)
+    return this.ecollectionService.merge(orig, src, this.actions.collection)
   }
 
   validateForm = (form: FormGroup): ValidationErrors | null => {
     let errors: ValidationErrors = {};
-    if (Object.keys(this.actions).length==0 ||
-      !Object.values(this.actions).some(v=>v!=FieldActions.NONE)) {
+    const actions = isEService(form.getRawValue()) ? this.actions.service : this.actions.collection;
+    if (Object.keys(actions).length==0 ||
+      !Object.values(actions).some(v=>v!=FieldActions.NONE)) {
         return {nofields: ''};
     }
-    for (const [key, value] of Object.entries<FieldActions>(this.actions)) {
+    for (const [key, value] of Object.entries<FieldActions>(actions)) {
       if ([FieldActions.APPEND, FieldActions.REPLACE].includes(value) && 
         !form.get(key).value ) {
         if (!errors.missingFields) errors.missingFields=[];
