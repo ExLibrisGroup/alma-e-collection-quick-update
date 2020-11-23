@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, LazyTranslateLoader } from '@exlibris/exl-cloudapp-angular-lib';
-import { ToastrModule } from 'ngx-toastr';
+import { MaterialModule, LazyTranslateLoader, AlertModule } from '@exlibris/exl-cloudapp-angular-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader, TranslateParser } from '@ngx-translate/core';
 import { TranslateICUParser } from 'ngx-translate-parser-plural-select';
@@ -17,13 +16,6 @@ import { OptionsAutoCompleteComponent } from './ecollection/options-autocomplete
 import { DatePipe } from '@angular/common';
 import { OptionsService } from './services/options.service';
 import { EcollectionService } from './services/ecollection.service';
-
-export function getToastrModule() {
-  return ToastrModule.forRoot({
-    positionClass: 'toast-top-right',
-    timeOut: 2000
-  });
-}
 
 export function getTranslateModuleWithICU() {
   return TranslateModule.forRoot({
@@ -55,7 +47,7 @@ export function getTranslateModuleWithICU() {
       FormsModule,
       ReactiveFormsModule,
       getTranslateModuleWithICU(),
-      getToastrModule()
+      AlertModule,
    ],
    providers: [
       DatePipe,

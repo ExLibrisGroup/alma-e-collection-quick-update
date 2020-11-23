@@ -32,3 +32,9 @@ export interface IntegrationProfile {
   code: string;
   description: string;
 }
+
+export interface Library {
+  code: string;
+  description: string;
+  name: string;
+}

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, ValidationErrors } from '@angular/forms';
-import { FormGroupUtil } from '@exlibris/exl-cloudapp-angular-lib';
+import { FormGroupUtil, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 import { ECollection, FieldActions, Actions } from '../models/ecollection';
 import { OptionsService } from '../services/options.service';
 import { Options } from '../models/options';
@@ -29,7 +28,7 @@ export class EcollectionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private ecollectionService: EcollectionService,
-    private toastr: ToastrService,
+    private alert: AlertService,
     private optionsService: OptionsService,
     private translateService: TranslateService
   ) { }
@@ -49,7 +48,7 @@ export class EcollectionComponent implements OnInit {
           this.form.controls[control].disable();
         }
       },
-      error: e => this.toastr.error('An error occurred: ', e.message)
+      error: e => this.alert.error('An error occurred: ', e.message)
     });
   }
 

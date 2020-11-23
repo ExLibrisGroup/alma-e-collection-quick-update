@@ -4,7 +4,15 @@ import { Observable, iif, of, forkJoin } from 'rxjs';
 import { CloudAppRestService, Request } from '@exlibris/exl-cloudapp-angular-lib';
 import { tap, switchMap, map } from 'rxjs/operators';
 import { camelCase, cloneDeep} from 'lodash';
-import { CodeTable, IntegrationProfile, License } from '../models/alma';
+import { CodeTable, IntegrationProfile, Library, License } from '../models/alma';
+
+interface OtherApi { 
+  [key: string]: { 
+    uri: string, 
+    code: string, 
+    desc: (obj: any) => string 
+  }
+};
 
 @Injectable()
 export class OptionsService {
@@ -15,7 +23,7 @@ export class OptionsService {
     'CounterPlatform',
     'BooleanYesNo'
   ];
-  private otherApis = {
+  private otherApis: OtherApi  = {
     Proxies: {
       uri: '/conf/integration-profiles?type=PROXY_DEFINITION',
       code: 'code',
@@ -25,6 +33,11 @@ export class OptionsService {
       uri: '/acq/licenses',
       code: 'code',
       desc: (i: License) => i.name
+    },
+    Libraries: {
+      uri: '/conf/libraries',
+      code: 'code',
+      desc: (l: Library) => l.name
     }
   }
   private _options: Options;

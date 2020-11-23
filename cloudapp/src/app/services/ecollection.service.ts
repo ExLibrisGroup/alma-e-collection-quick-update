@@ -34,17 +34,19 @@ export class EcollectionService {
         src[key] = orig[key] += `; ${src[key]}`;
       }
     }
-    if (src.activation_date) {
-      src.activation_date = src.activation_date == ""
-        ? null
-        : this.datePipe.transform(src.activation_date,'yyyy-MM-dd');
-    }
-    if (src.expected_activation_date) {
-      src.expected_activation_date = src.expected_activation_date == "" 
-        ? null
-        : this.datePipe.transform(src.expected_activation_date,'yyyy-MM-dd');
-    }
+    ['activation_date', 'expected_activation_date'].forEach(f=>this.formatDate(src, f));
+    ['is_suppressed_from_cdi'].forEach(f=>this.formatBoolean(src, f));
     return Object.assign(orig, src);
+  }
+
+  private formatDate(obj: ECollection, field: string) {
+    if (!obj[field]) return;
+    obj[field] = this.datePipe.transform(obj[field],'yyyy-MM-dd');
+  }
+
+  private formatBoolean(obj: ECollection, field: string) {
+    if (obj[field] == undefined) return;
+    obj[field] = obj[field] === 'true';
   }
 
 }

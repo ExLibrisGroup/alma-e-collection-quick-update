@@ -18,8 +18,11 @@
 			"access_type.value": "Access type",
 			"counter_platform.value": "Counter Platform",
 			"license.value": "License",
+			"library.value": "Library",
 			"activation_date": "Activation Date",
-			"expected_activation_date": "Expected Date"
+			"expected_activation_date": "Expected Date",
+			"is_selective.value": "We subscribe to only some titles in the collection",
+			"is_suppressed_from_cdi": "Do not show as full text in CDI even if active in Alma"
 		},
 		"Actions": {
 			"none": "None",

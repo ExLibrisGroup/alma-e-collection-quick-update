@@ -134,6 +134,48 @@
         >
       </app-options-autocomplete>
     </div>   
+    <div class="field-title">{{'Form.Fields.library.value' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="library.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <app-options-autocomplete
+        [options]="options.libraries"
+        [placeholder]="'SelectOne' | translate"
+        [control]="form.get('library.value')"
+        >
+      </app-options-autocomplete>
+    </div>       
+    <div class="field-title">{{'Form.Fields.is_selective.value' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="is_selective.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="form.get('is_selective.value')">
+        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>    
+    <div class="field-title">{{'Form.Fields.is_suppressed_from_cdi' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="is_suppressed_from_cdi" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="form.get('is_suppressed_from_cdi')">
+        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>      
     <div class="field-title">{{'Form.Fields.activation_date' | translate}}</div>
     <div>
       <mat-form-field>

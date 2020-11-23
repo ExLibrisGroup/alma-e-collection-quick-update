@@ -6,6 +6,7 @@ export class Options {
   counterPlatform: Option[] = [];
   proxies: Option[] = [];
   licenses: Option[] = [];
+  libraries: Option[] = [];
 }
 
 export interface Option {

@@ -7,8 +7,11 @@ export class ECollection {
   access_type: Value = new Value();
   counter_platform: Value = new Value();
   license: Value = new Value();
+  library: Value = new Value();
   activation_date: string = "";
   expected_activation_date: string = "";
+  is_selective: Value = new Value();
+  is_suppressed_from_cdi: boolean = null;
 }
 
 export class Value {
