@@ -114,7 +114,7 @@ export class EcollectionComponent implements OnInit {
       ),
       of(null)
     ).pipe(
-      switchMap(resp=>iif(()=>resp.isError, resp, this.ecollectionService.update(body))),
+      switchMap(resp=>iif(()=>resp && resp.isError, resp, this.ecollectionService.update(body))),
       tap(()=>this.percentage += (1/this.ids.length)*50)
     )
   }
