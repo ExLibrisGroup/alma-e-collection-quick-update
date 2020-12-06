@@ -40,7 +40,9 @@ export class EcollectionService {
       if (!field || actions[field] == FieldActions.NONE) {
         delete src[key];
       } else if (actions[field] == FieldActions.APPEND) {
-        src[key] = orig[key] += `; ${src[key]}`;
+        if (orig[key]) src[key] = orig[key] += `; ${src[key]}`;
+      } else if (actions[field] == FieldActions.CLEAR) {
+        src[key] = "";
       }
     }
     ['activation_date', 'expected_activation_date', 'service_unavailable_date'].forEach(f=>this.formatDate(src, f));
