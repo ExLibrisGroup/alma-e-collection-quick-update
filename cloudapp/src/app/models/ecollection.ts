@@ -12,6 +12,7 @@ export class ECollection {
   expected_activation_date: string = "";
   is_selective: Value = new Value();
   is_suppressed_from_cdi: boolean = null;
+  public_note: string = "";
 }
 
 export class Value {

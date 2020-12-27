@@ -32,6 +32,24 @@
         cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>  
     </div>
+    <div class="field-title">{{'Form.Fields.public_note' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="public_note" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.public_note' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="form.get('public_note')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>    
     <div class="field-title">{{'Form.Fields.proxy_enabled.value' | translate}}</div>
     <div>
       <mat-form-field>

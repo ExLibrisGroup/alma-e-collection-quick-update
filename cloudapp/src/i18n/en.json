@@ -11,6 +11,7 @@
 		"SuccessMessage": "ID {id} was successfully updated.",
 		"Fields": {
 			"internal_description": "Internal Description",
+			"public_note": "Public note",
 			"proxy_enabled.value": "Proxy enabled",
 			"free.value": "Free",
 			"proxy": "Proxy Selected",
