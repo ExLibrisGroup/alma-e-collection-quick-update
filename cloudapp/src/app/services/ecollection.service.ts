@@ -42,7 +42,7 @@ export class EcollectionService {
       } else if (actions[field] == FieldActions.APPEND) {
         if (orig[key]) src[key] = orig[key] += `; ${src[key]}`;
       } else if (actions[field] == FieldActions.CLEAR) {
-        src[key] = "";
+        src[key] = key.includes("_date") ? null : "";
       }
     }
     ['activation_date', 'expected_activation_date', 'service_unavailable_date'].forEach(f=>this.formatDate(src, f));

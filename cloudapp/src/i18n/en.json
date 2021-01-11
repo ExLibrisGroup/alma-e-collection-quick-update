@@ -27,6 +27,9 @@
 		"ServiceFields": {
 			"internal_description": "Internal Description",
 			"public_description": "Public Description",
+			"authentication_note": "Authentication Note",
+			"proxy_enabled.value": "Proxy enabled",
+			"proxy": "Proxy Selected",			
 			"activate_new_portfolios": "Activate new portfolios",
 			"service_temporarily_unavailable.value": "Service temporarily unavailable",
 			"service_unavailable_reason": "Service unavailable reason",

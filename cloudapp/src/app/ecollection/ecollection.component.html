@@ -32,19 +32,6 @@
         cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>  
     </div>
-    <div class="field-title">{{'Form.Fields.proxy_enabled.value' | translate}}</div>
-    <div>
-      <mat-form-field>
-        <mat-select value='NONE' data-action="proxy_enabled.value" (selectionChange)="toggle($event)">
-          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
-        </mat-select>
-      </mat-form-field>  
-    </div>
-    <div> 
-      <mat-radio-group aria-label="Select an option" [formControl]="form.get('proxy_enabled.value')">
-        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
-      </mat-radio-group>  
-    </div>
     <div class="field-title">{{'Form.Fields.free.value' | translate}}</div>
     <div>
       <mat-form-field>
@@ -56,6 +43,19 @@
     <div> 
       <mat-radio-group aria-label="Select an option" [formControl]="form.get('free.value')">
         <mat-radio-button *ngFor="let row of options.isFree" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>
+    <div class="field-title">{{'Form.Fields.proxy_enabled.value' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="proxy_enabled.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="form.get('proxy_enabled.value')">
+        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
       </mat-radio-group>  
     </div>
     <div class="field-title">{{'Form.Fields.proxy' | translate}}</div>
@@ -254,6 +254,54 @@
         cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>  
     </div>  
+    <div class="field-title">{{'Form.ServiceFields.authentication_note' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="authentication_note" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.ServiceFields.authentication_note' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="serviceForm.get('authentication_note')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>      
+    <div class="field-title">{{'Form.ServiceFields.proxy_enabled.value' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="proxy_enabled.value" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="serviceForm.get('proxy_enabled.value')">
+        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>
+    <div class="field-title">{{'Form.ServiceFields.proxy' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="proxy" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-form-field>
+        <mat-placeholder>{{'SelectOne' | translate}}</mat-placeholder>
+        <mat-select [formControl]="serviceForm.get('proxy')">
+          <mat-option value='DEFAULT'>DEFAULT</mat-option>
+          <mat-option *ngFor="let proxy of options.proxies" [value]="proxy.code">{{proxy.code.concat(proxy.code ? ' (' + proxy.desc + ')' : '')}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>          
     <div class="field-title">{{'Form.ServiceFields.activate_new_portfolios' | translate}}</div>
     <div>
       <mat-form-field>

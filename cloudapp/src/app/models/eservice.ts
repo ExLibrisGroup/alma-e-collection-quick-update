@@ -3,6 +3,9 @@ import { Value } from "./ecollection";
 export class EService {
   internal_description: string = "";
   public_description: string = "";
+  authentication_note: string = "";
+  proxy_enabled: Value = new Value();
+  proxy: string = "";
   activate_new_portfolios: boolean = null;
   service_temporarily_unavailable: Value = new Value();
   service_unavailable_reason: string = "";
