@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 import { FormGroupUtil, AlertService } from '@exlibris/exl-cloudapp-angular-lib';
-import { finalize, map, switchMap, tap } from 'rxjs/operators';
+import { defaultIfEmpty, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { ECollection, FieldActions, Actions, FormActions } from '../models/ecollection';
 import { OptionsService } from '../services/options.service';
 import { Options } from '../models/options';
@@ -109,7 +109,8 @@ export class EcollectionComponent implements OnInit {
     /* Update Services */
     return this.ecollectionService.getServices(body.id).pipe(
         map(resp=>resp.electronic_service.map(orig=>this.mergeEService(orig))),
-        switchMap(resp=>forkJoin(resp.map(serv=>this.ecollectionService.update(serv)))),
+        switchMap(resp=>forkJoin(resp.map(serv=>this.ecollectionService.update(serv)))
+        .pipe(defaultIfEmpty([]))),
       )
       .pipe(
         switchMap(resp=>iif(() => resp.some(r=>r.isError), of(resp.find(r=>r.isError)), this.ecollectionService.update(body))),
