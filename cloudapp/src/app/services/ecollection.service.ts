@@ -5,7 +5,7 @@ import { ECollection, Actions, FieldActions } from '../models/ecollection';
 import { DatePipe } from '@angular/common';
 import { ElectronicServices } from '../models/eservice';
 
-@Injectable({ providedIn: "root" })
+@Injectable()
 export class EcollectionService {
 
   constructor(
