@@ -1,5 +1,8 @@
 export class ECollection {
   internal_description: string = "";
+  authentication_note: string = "";
+  public_note : string = "";
+
   proxy_enabled: Value = new Value();
   free: Value = new Value();
   proxy: string = "";
