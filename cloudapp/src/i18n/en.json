@@ -11,6 +11,7 @@
 		"SuccessMessage": "ID {id} was successfully updated.",
 		"Fields": {
 			"internal_description": "Internal Description",
+			"authentication_note": "Authentication Note",
 			"proxy_enabled.value": "Proxy enabled",
 			"free.value": "Free",
 			"proxy": "Proxy Selected",
@@ -22,7 +23,9 @@
 			"activation_date": "Activation Date",
 			"expected_activation_date": "Expected Date",
 			"is_selective.value": "We subscribe to only some titles in the collection",
-			"is_suppressed_from_cdi": "Do not show as full text in CDI even if active in Alma"
+			"is_suppressed_from_cdi": "Do not show as full text in CDI even if active in Alma",
+			"public_note" : "Public Note"
+
 		},
 		"ServiceFields": {
 			"internal_description": "Internal Description",
@@ -30,10 +33,17 @@
 			"authentication_note": "Authentication Note",
 			"proxy_enabled.value": "Proxy enabled",
 			"proxy": "Proxy Selected",			
+			"activation_status":"Activation Status",
+			"activation_status.value":"Activation Status",
 			"activate_new_portfolios": "Activate new portfolios",
 			"service_temporarily_unavailable.value": "Service temporarily unavailable",
 			"service_unavailable_reason": "Service unavailable reason",
-			"service_unavailable_date": "Service unavailable date"
+			"service_unavailable_date": "Service unavailable date",
+			"public_note" : "Public Note",
+			"url_type_override" : "URL type (override)",
+			"dynamic_url_override" : "Dynamic URL (override)",
+			"parser_override" : "Parser (override)",
+			"parser_parameters_override" : "Parser parameters (override)"
 		},
 		"Actions": {
 			"none": "None",

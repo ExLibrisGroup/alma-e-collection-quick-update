@@ -7,6 +7,12 @@ export class Options {
   proxies: Option[] = [];
   licenses: Option[] = [];
   libraries: Option[] = [];
+  electronicBaseStatus : Option[]=[];
+  // TODO: Check about adding code table to alma
+  urlTypes: Option[] = [
+    { code: 'param', desc: 'Parameter' },
+    { code: 'dynamic', desc: 'Dynamic' }
+  ]; 
 }
 
 export interface Option {

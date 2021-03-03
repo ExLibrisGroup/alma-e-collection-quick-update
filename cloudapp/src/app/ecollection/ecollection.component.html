@@ -32,6 +32,42 @@
         cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>  
     </div>
+    <div class="field-title">{{'Form.Fields.authentication_note' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="authentication_note" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.authentication_note' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="form.get('authentication_note')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>    
+    <div class="field-title">{{'Form.Fields.public_note' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="public_note" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.Fields.public_note' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="form.get('public_note')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>    
     <div class="field-title">{{'Form.Fields.free.value' | translate}}</div>
     <div>
       <mat-form-field>
@@ -254,6 +290,24 @@
         cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>  
     </div>  
+    <div class="field-title">{{'Form.ServiceFields.public_note' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="public_note" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.ServiceFields.public_note' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="serviceForm.get('public_note')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>    
     <div class="field-title">{{'Form.ServiceFields.authentication_note' | translate}}</div>
     <div>
       <mat-form-field>
@@ -301,7 +355,20 @@
           <mat-option *ngFor="let proxy of options.proxies" [value]="proxy.code">{{proxy.code.concat(proxy.code ? ' (' + proxy.desc + ')' : '')}}</mat-option>
         </mat-select>
       </mat-form-field>  
-    </div>          
+    </div>         
+    <div class="field-title">{{'Form.ServiceFields.activation_status' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="activation_status.value" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <mat-radio-group aria-label="Select an option" [formControl]="serviceForm.get('activation_status.value')">
+        <mat-radio-button *ngFor="let row of options.electronicBaseStatus" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>  
+    </div>           
     <div class="field-title">{{'Form.ServiceFields.activate_new_portfolios' | translate}}</div>
     <div>
       <mat-form-field>
@@ -315,6 +382,79 @@
         <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
       </mat-radio-group>  
     </div>  
+    <div class="field-title">{{'Form.ServiceFields.url_type_override' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="url_type_override.value" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <div> 
+        <mat-radio-group aria-label="Select an option" [formControl]="serviceForm.get('url_type_override.value')">
+          <mat-radio-button *ngFor="let row of options.urlTypes" [value]="row.code">{{row.desc}}</mat-radio-button>
+        </mat-radio-group>  
+      </div>        
+    </div> 
+    <ng-container *ngIf="serviceForm.get('url_type_override.value').value==='dynamic'"> 
+      <div class="field-title">{{'Form.ServiceFields.dynamic_url_override' | translate}}</div>
+      <div>
+        <mat-form-field>
+          <mat-select value="NONE" data-action="dynamic_url_override" (selectionChange)="toggle($event, 'service')">
+            <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>{{'Form.ServiceFields.dynamic_url_override' | translate}}</mat-label>
+          <textarea matInput 
+          [formControl]="serviceForm.get('dynamic_url_override')"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>  
+      </div>      
+    </ng-container>
+  <ng-container *ngIf="serviceForm.get('url_type_override.value').value==='param'"> 
+    <div class="field-title">{{'Form.ServiceFields.parser_override' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="parser_override" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.ServiceFields.parser_override' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="serviceForm.get('parser_override')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>       
+    <div class="field-title">{{'Form.ServiceFields.parser_parameters_override' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value="NONE" data-action="parser_parameters_override" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace', 'append' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.ServiceFields.parser_parameters_override' | translate}}</mat-label>
+        <textarea matInput 
+        [formControl]="serviceForm.get('parser_parameters_override')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>  
+    </div>
+  </ng-container>     
     <div class="field-title">{{'Form.ServiceFields.service_temporarily_unavailable.value' | translate}}</div>
     <div>
       <mat-form-field>
