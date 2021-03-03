@@ -8,7 +8,11 @@ export class Options {
   licenses: Option[] = [];
   libraries: Option[] = [];
   electronicBaseStatus : Option[]=[];
-  urlTypes: Option[] =[{code:'param',desc:'Parameter'},{code:'dynamic',desc:'Dynamic'}]; //TOOD Check about adding code table to alma
+  // TODO: Check about adding code table to alma
+  urlTypes: Option[] = [
+    { code: 'param', desc: 'Parameter' },
+    { code: 'dynamic', desc: 'Dynamic' }
+  ]; 
 }
 
 export interface Option {
