@@ -497,11 +497,43 @@
     <div>
       <mat-form-field>
         <mat-label>{{'Form.ServiceFields.service_unavailable_date' | translate}}</mat-label>
-        <input matInput [matDatepicker]="expectedPicker" [formControl]="serviceForm.get('service_unavailable_date')">
-        <mat-datepicker-toggle matSuffix [for]="expectedPicker"></mat-datepicker-toggle>
-        <mat-datepicker #expectedPicker></mat-datepicker>    
+        <input matInput [matDatepicker]="serviceUnavailablePicker" [formControl]="serviceForm.get('service_unavailable_date')">
+        <mat-datepicker-toggle matSuffix [for]="serviceUnavailablePicker"></mat-datepicker-toggle>
+        <mat-datepicker #serviceUnavailablePicker></mat-datepicker>    
       </mat-form-field>  
     </div>               
+    <div class="field-title">{{'Form.ServiceFields.active_from_date' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="active_from_date" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>    
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.ServiceFields.active_from_date' | translate}}</mat-label>
+        <input matInput [matDatepicker]="activeFromPicker" [formControl]="serviceForm.get('active_from_date')">
+        <mat-datepicker-toggle matSuffix [for]="activeFromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #activeFromPicker></mat-datepicker>    
+      </mat-form-field>  
+    </div>   
+    <div class="field-title">{{'Form.ServiceFields.active_until_date' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="active_until_date" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>    
+    <div>
+      <mat-form-field>
+        <mat-label>{{'Form.ServiceFields.active_until_date' | translate}}</mat-label>
+        <input matInput [matDatepicker]="activeUntilPicker" [formControl]="serviceForm.get('active_until_date')">
+        <mat-datepicker-toggle matSuffix [for]="activeUntilPicker"></mat-datepicker-toggle>
+        <mat-datepicker #activeUntilPicker></mat-datepicker>    
+      </mat-form-field>  
+    </div>       
     <div *ngIf="serviceForm.errors" class="field-title">
       <ul>
         <li *ngFor="let field of serviceForm.errors.missingFields">

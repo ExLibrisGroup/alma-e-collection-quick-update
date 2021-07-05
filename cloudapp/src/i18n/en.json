@@ -43,7 +43,9 @@
 			"url_type_override" : "URL type (override)",
 			"dynamic_url_override" : "Dynamic URL (override)",
 			"parser_override" : "Parser (override)",
-			"parser_parameters_override" : "Parser parameters (override)"
+			"parser_parameters_override" : "Parser parameters (override)",
+			"active_from_date": "Active from",
+			"active_until_date": "Active until"
 		},
 		"Actions": {
 			"none": "None",
