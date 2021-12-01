@@ -34,7 +34,7 @@ export class EcollectionService {
   }
 
   merge(orig: any, src: any, actions: Actions) {
-    if (Object.keys(actions).length==0) return orig; // nothing to do
+    if (Object.keys(actions).length==0) return null; // nothing to do
     for (const key of Object.keys(src)) {
       const field = Object.keys(actions).find(name=>key==name.split('.')[0]);
       if (!field || actions[field] == FieldActions.NONE) {

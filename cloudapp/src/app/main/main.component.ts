@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Entity, CloudAppEventsService, EntityType } from '@exlibris/exl-cloudapp-angular-lib';
+import { Entity } from '@exlibris/exl-cloudapp-angular-lib';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -9,33 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  private pageLoad$: Subscription;
-  ids = new Set<string>();
-  entities: Entity[] = [];
+  selectedEntities = new Array<Entity>();
+  entityCount = 0;
 
   constructor(
-    private eventsService: CloudAppEventsService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.pageLoad$ = this.eventsService.onPageLoad( pageInfo => {
-      this.entities = (pageInfo.entities||[])
-      .filter(e=>[EntityType.IEPA].includes(e.type));
-    });
   }
 
   ngOnDestroy(): void {
-    this.pageLoad$.unsubscribe();
-  }
-
-  onEntitySelected(event) {
-    if (event.checked) this.ids.add(event.mmsId);
-    else this.ids.delete(event.mmsId);
   }
 
   update() {
-    const params = {ids: Array.from(this.ids).join(',')};
+    const params = {ids: this.selectedEntities.map(e => e.id).join(',')};
     this.router.navigate(['ecollection', params]);
   }
 }

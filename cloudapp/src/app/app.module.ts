@@ -10,14 +10,14 @@ import { TranslateICUParser } from 'ngx-translate-parser-plural-select';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
-import { SelectEntitiesComponent } from './select-entities/select-entities.component';
 import { EcollectionComponent } from './ecollection/ecollection.component';
 import { OptionsAutoCompleteComponent } from './ecollection/options-autocomplete.component';
 import { DatePipe } from '@angular/common';
 import { OptionsService } from './services/options.service';
 import { EcollectionService } from './services/ecollection.service';
+import { SelectEntitiesModule } from 'eca-components';
 
-export function getTranslateModuleWithICU() {
+export function CloudAppTranslateModuleWithICU() {
   return TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
@@ -34,7 +34,6 @@ export function getTranslateModuleWithICU() {
    declarations: [
       AppComponent,
       MainComponent,
-      SelectEntitiesComponent,
       EcollectionComponent,
       OptionsAutoCompleteComponent
    ],
@@ -46,8 +45,9 @@ export function getTranslateModuleWithICU() {
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
-      getTranslateModuleWithICU(),
+      CloudAppTranslateModuleWithICU(),
       AlertModule,
+      SelectEntitiesModule,
    ],
    providers: [
       DatePipe,

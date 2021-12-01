@@ -109,7 +109,7 @@ export class EcollectionComponent implements OnInit {
     /* Update Services */
     return this.ecollectionService.getServices(body.id).pipe(
         map(resp=>resp.electronic_service.map(orig=>this.mergeEService(orig))),
-        switchMap(resp=>forkJoin(resp.map(serv=>this.ecollectionService.update(serv)))
+        switchMap(resp=>forkJoin(resp.filter(r => !!r).map(serv=>this.ecollectionService.update(serv)))
         .pipe(defaultIfEmpty([]))),
       )
       .pipe(
