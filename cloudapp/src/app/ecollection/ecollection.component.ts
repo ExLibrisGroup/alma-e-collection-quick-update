@@ -108,9 +108,10 @@ export class EcollectionComponent implements OnInit {
   updateECollection(body: any) {
     /* Update Services */
     return this.ecollectionService.getServices(body.id)
-    .pipe(
-      map(resp => resp.electronic_service.map(orig=>this.mergeEService(orig))),
-      switchMap(resp => forkJoin(resp.filter(r => !!r).map(serv=>this.ecollectionService.update(serv)))
+    .pipe (
+      switchMap(resp => forkJoin(resp.electronic_service.map(orig=>this.getServiceLink(orig)))),
+      map(resp2 => resp2.map(resp=>this.mergeEService(resp))),
+      switchMap(resp2 => forkJoin(resp2.filter(r => !!r).map(serv=>this.ecollectionService.update(serv)))
       .pipe(defaultIfEmpty([]))),
       switchMap(resp => iif(
         () => resp.some(r=>r.isError), 
@@ -119,6 +120,10 @@ export class EcollectionComponent implements OnInit {
       ),
       tap(() => this.percentage += (1/this.ids.length)*50)
     )
+  }
+
+  getServiceLink(serviceLink: any) {
+    return this.ecollectionService.getService (serviceLink.link);
   }
 
   mergeEService(orig: any) {
