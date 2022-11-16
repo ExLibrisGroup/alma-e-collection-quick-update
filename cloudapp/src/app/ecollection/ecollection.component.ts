@@ -7,7 +7,7 @@ import { ECollection, FieldActions, Actions, FormActions } from '../models/ecoll
 import { OptionsService } from '../services/options.service';
 import { Options } from '../models/options';
 import { MatSelectChange } from '@angular/material/select'
-import { forkJoin, iif, of } from 'rxjs';
+import { forkJoin, iif, of, Observable } from 'rxjs';
 import { EcollectionService } from '../services/ecollection.service';
 import { TranslateService } from '@ngx-translate/core';
 import { EService, isEService } from '../models/eservice';
@@ -106,20 +106,25 @@ export class EcollectionComponent implements OnInit {
   }
 
   updateECollection(body: any) {
-    /* Update Services */
-    return this.ecollectionService.getServices(body.id)
-    .pipe (
-      switchMap(resp => forkJoin(resp.electronic_service.map(orig=>this.getService(orig)))),
-      map(resp => resp.map(resp=>this.mergeEService(resp))),
-      switchMap(resp => forkJoin(resp.filter(r => !!r).map(serv=>this.ecollectionService.update(serv)))
-      .pipe(defaultIfEmpty([]))),
-      switchMap(resp => iif(
-        () => resp.some(r=>r.isError), 
-        of(resp.find(r=>r.isError)), 
-        this.ecollectionService.update(body))
-      ),
-      tap(() => this.percentage += (1/this.ids.length)*50)
-    )
+    const getServices$ = this.ecollectionService.getServices(body.id).pipe(map(resp => resp.electronic_service))
+
+    const updateECollection$ = this.ecollectionService.update(body);
+    
+    const updateService = (eServices : EService[]):Observable<any> => {
+        const afterMerge = eServices.map(resp => this.mergeEService(resp)).filter(r => !!r);
+        return forkJoin(afterMerge.map(serv => this.ecollectionService.update(serv))).pipe(
+          defaultIfEmpty([]),
+          switchMap(resp => iif(
+            () => resp.some(r=>r.isError), 
+            of(resp.find(r=>r.isError)), 
+            this.ecollectionService.update(body))
+          ),
+          );
+        
+    };
+    
+    return getServices$.pipe(switchMap((eServices) => eServices.length === 0 ? updateECollection$ : updateService(eServices)),(tap(() => this.percentage += (1 / this.ids.length) * 50)))
+    
   }
 
   getService(service: any) {
