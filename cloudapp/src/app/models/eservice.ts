@@ -16,6 +16,7 @@ export class EService {
   service_temporarily_unavailable: Value = new Value();
   service_unavailable_reason: string = "";
   service_unavailable_date: string = "";
+  service_unavailable_until_date: string = "";
   active_from_date: string = "";
   active_until_date: string = "";
 }
