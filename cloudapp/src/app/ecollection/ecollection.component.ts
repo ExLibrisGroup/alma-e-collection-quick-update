@@ -106,7 +106,9 @@ export class EcollectionComponent implements OnInit {
   }
 
   updateECollection(body: any) {
-    const getServices$ = this.ecollectionService.getServices(body.id).pipe(map(resp => resp.electronic_service))
+    const getServices$ = this.ecollectionService.getServices(body.id).pipe(
+      switchMap(resp => forkJoin(resp.electronic_service.map(orig=>this.getService(orig))))
+    )
 
     const updateECollection$ = this.ecollectionService.update(body);
     
