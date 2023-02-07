@@ -106,24 +106,29 @@ export class EcollectionComponent implements OnInit {
   }
 
   updateECollection(body: any) {
-    const getServices$ = this.ecollectionService.getServices(body.id).pipe(map(resp => resp.electronic_service))
 
     const updateECollection$ = this.ecollectionService.update(body);
-    
+
+    const getServices$ = this.ecollectionService.getServices(body.id).pipe(map(resp => resp.electronic_service));
+
     const updateService = (eServices : EService[]):Observable<any> => {
-        const afterMerge = eServices.map(resp => this.mergeEService(resp)).filter(r => !!r);
-        return forkJoin(afterMerge.map(serv => this.ecollectionService.update(serv))).pipe(
-          defaultIfEmpty([]),
+
+      return forkJoin(eServices.map(orig=>this.getService(orig))).pipe(
+        map(resp => resp.map(resp=>this.mergeEService(resp))),
+        switchMap(resp => forkJoin(resp.filter(r => !!r).map(serv=>this.ecollectionService.update(serv))).pipe(
+          defaultIfEmpty([]))),
           switchMap(resp => iif(
             () => resp.some(r=>r.isError), 
             of(resp.find(r=>r.isError)), 
-            this.ecollectionService.update(body))
-          ),
-          );
-        
+          this.ecollectionService.update(body))
+          )
+      )      
     };
-    
-    return getServices$.pipe(switchMap((eServices) => eServices.length === 0 ? updateECollection$ : updateService(eServices)),(tap(() => this.percentage += (1 / this.ids.length) * 50)))
+
+    return getServices$.pipe(switchMap(eServices => eServices.length === 0 ?
+        updateECollection$ : updateService(eServices)),
+        (tap(() => this.percentage += (1 / this.ids.length) * 50))
+    )
     
   }
 
