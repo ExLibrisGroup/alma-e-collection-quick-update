@@ -24,7 +24,8 @@
 			"expected_activation_date": "Expected Date",
 			"is_selective.value": "We subscribe to only some titles in the collection",
 			"is_suppressed_from_cdi": "Do not show as full text in CDI even if active in Alma",
-			"public_note" : "Public Note"
+			"public_note" : "Public Note",
+			"public_access_model.value" : "Public Access Model"
 
 		},
 		"ServiceFields": {

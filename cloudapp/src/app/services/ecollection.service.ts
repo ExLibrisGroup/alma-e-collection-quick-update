@@ -42,7 +42,7 @@ export class EcollectionService {
       } else if (actions[field] == FieldActions.APPEND) {
         if (orig[key]) src[key] = orig[key] += `; ${src[key]}`;
       } else if (actions[field] == FieldActions.CLEAR) {
-        src[key] = key.includes("_date") ? null : "";
+        src[key] = key.includes("_date") || key === "public_access_model" ? null : "";
       }
     }
     ['activation_date', 'expected_activation_date', 'service_unavailable_date', 'service_unavailable_until_date', 'active_from_date', 'active_until_date'].forEach(f=>this.formatDate(src, f));
