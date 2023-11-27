@@ -6,7 +6,7 @@ export class Options {
   counterPlatform: Option[] = [];
   proxies: Option[] = [];
   licenses: Option[] = [];
-  publicAccessModels: Option[] = [];
+  publicAccessModel: Option[] = [];
   libraries: Option[] = [];
   electronicBaseStatus : Option[]=[];
   // TODO: Check about adding code table to alma
