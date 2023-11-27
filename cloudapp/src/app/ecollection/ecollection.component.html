@@ -170,6 +170,22 @@
         >
       </app-options-autocomplete>
     </div>   
+    <div class="field-title">{{'Form.Fields.public_access_model.value' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="public_access_model.value" (selectionChange)="toggle($event)">
+          <mat-option *ngFor="let action of [ 'none', 'clear', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </div>
+    <div> 
+      <app-options-autocomplete
+        [options]="options.publicAccessModel"
+        [placeholder]="'SelectOne' | translate"
+        [control]="form.get('public_access_model.value')"
+        >
+      </app-options-autocomplete>
+    </div>   
     <div class="field-title">{{'Form.Fields.library.value' | translate}}</div>
     <div>
       <mat-form-field>

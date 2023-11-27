@@ -23,6 +23,7 @@ export class OptionsService {
     'CounterPlatform',
     'BooleanYesNo',
     'ElectronicBaseStatus',
+    'PublicAccessModel'
   ];
   private otherApis: OtherApi = {
     Proxies: {

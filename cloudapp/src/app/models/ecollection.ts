@@ -9,6 +9,7 @@ export class ECollection {
   access_type: Value = new Value();
   counter_platform: Value = new Value();
   license: Value = new Value();
+  public_access_model: Value = new Value();
   library: Value = new Value();
   activation_date: string = "";
   expected_activation_date: string = "";
