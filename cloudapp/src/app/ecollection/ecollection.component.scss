@@ -37,3 +37,10 @@ mat-form-field, mat-radio-group {
 div.results button {
   margin: 10px 0 20px;
 }
+
+
+::ng-deep .cdk-overlay-pane > .mat-autocomplete-panel > .mat-option {
+  /* Do you changes here */
+    min-width:450px;
+    overflow: unset !important;
+}
