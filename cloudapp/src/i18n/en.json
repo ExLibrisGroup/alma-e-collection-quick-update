@@ -1,6 +1,6 @@
 {
   "Main": {
-		"Intro": "Select the e-collection(s) that you wish to update. You can page through the records in Alma and your selection will be remembered. Note: Updating services might delete linking parameters configured on group settings. We’ll remove this note when the API is fixed.",
+		"Intro": "Select the e-collection(s) that you wish to update. You can page through the records in Alma and your selection will be remembered.",
 		"Update": "Update {count, plural, =0 {} other {{count}}} {count, plural, =1{E-Collection} other{E-Collections}}",
 		"NoRecords": "This app allows you to quickly update e-collections. Please navigate to a list of e-collections."
 	},
