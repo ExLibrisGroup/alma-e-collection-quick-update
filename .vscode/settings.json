@@ -15,11 +15,6 @@
             ],
             "url": "/node_modules/@exlibris/exl-cloudapp-base/manifest.schema.json"
         }
-    ],
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#510F4F",
-        "titleBar.activeBackground": "#72156E",
-        "titleBar.activeForeground": "#FEFBFE"
-    }
+    ]
     
 }
