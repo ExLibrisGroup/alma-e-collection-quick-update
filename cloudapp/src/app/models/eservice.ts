@@ -13,6 +13,7 @@ export class EService {
   dynamic_url_override: string ="";
   url_type_override: Value = new Value();
   activate_new_portfolios: boolean = null;
+  delete_removed_portfolios: boolean = null;
   service_temporarily_unavailable: Value = new Value();
   service_unavailable_reason: string = "";
   service_unavailable_date: string = "";
