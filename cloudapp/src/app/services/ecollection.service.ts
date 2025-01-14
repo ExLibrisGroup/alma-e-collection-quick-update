@@ -46,7 +46,7 @@ export class EcollectionService {
       }
     }
     ['activation_date', 'expected_activation_date', 'service_unavailable_date', 'service_unavailable_until_date', 'active_from_date', 'active_until_date'].forEach(f=>this.formatDate(src, f));
-    ['is_suppressed_from_cdi', 'activate_new_portfolios'].forEach(f=>this.formatBoolean(src, f));
+    ['is_suppressed_from_cdi', 'activate_new_portfolios', 'delete_removed_portfolios'].forEach(f=>this.formatBoolean(src, f));
     return Object.assign(orig, src);
   }
 
