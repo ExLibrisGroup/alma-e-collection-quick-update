@@ -397,7 +397,20 @@
       <mat-radio-group aria-label="Select an option" [formControl]="serviceForm.get('activate_new_portfolios')">
         <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
       </mat-radio-group>  
-    </div>  
+    </div>
+        <div class="field-title">{{'Form.ServiceFields.delete_removed_portfolios' | translate}}</div>
+    <div>
+      <mat-form-field>
+        <mat-select value='NONE' data-action="delete_removed_portfolios" (selectionChange)="toggle($event, 'service')">
+          <mat-option *ngFor="let action of [ 'none', 'replace' ]" [value]="action.toUpperCase()">{{'Form.Actions.'+action | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-radio-group aria-label="Select an option" [formControl]="serviceForm.get('delete_removed_portfolios')">
+        <mat-radio-button *ngFor="let row of options.booleanYesNo" [value]="row.code">{{row.desc}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
     <div class="field-title">{{'Form.ServiceFields.url_type_override' | translate}}</div>
     <div>
       <mat-form-field>
