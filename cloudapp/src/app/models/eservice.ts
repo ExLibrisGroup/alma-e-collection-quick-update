@@ -14,6 +14,7 @@ export class EService {
   url_type_override: Value = new Value();
   activate_new_portfolios: boolean = null;
   delete_removed_portfolios: boolean = null;
+  deactivate_removed_portfolios: string = ""; 
   service_temporarily_unavailable: Value = new Value();
   service_unavailable_reason: string = "";
   service_unavailable_date: string = "";

@@ -47,6 +47,7 @@ export class EcollectionService {
     }
     ['activation_date', 'expected_activation_date', 'service_unavailable_date', 'service_unavailable_until_date', 'active_from_date', 'active_until_date'].forEach(f=>this.formatDate(src, f));
     ['is_suppressed_from_cdi', 'activate_new_portfolios', 'delete_removed_portfolios'].forEach(f=>this.formatBoolean(src, f));
+    this.removeDeactivateIfNeeded(orig, src, actions);
     return Object.assign(orig, src);
   }
 
@@ -59,5 +60,14 @@ export class EcollectionService {
     if (obj[field] == undefined) return;
     obj[field] = obj[field] === 'true';
   }
+
+  private removeDeactivateIfNeeded(orig: any, src: any, actions: Actions) {
+    const deactivateActionKey = Object.keys(actions).find(name => name.split('.')[0] === 'deactivate_removed_portfolios');
+    const deactivateActionIsNone = !deactivateActionKey || actions[deactivateActionKey] === FieldActions.NONE;
+    const deleteFlag = (src.hasOwnProperty('delete_removed_portfolios') ? src.delete_removed_portfolios : orig.delete_removed_portfolios);
+    if (deactivateActionIsNone && !!deleteFlag) {
+     delete orig['deactivate_removed_portfolios'];
+    }
+}
 
 }
