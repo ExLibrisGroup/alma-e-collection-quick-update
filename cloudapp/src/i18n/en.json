@@ -38,6 +38,7 @@
 			"activation_status.value":"Activation Status",
 			"activate_new_portfolios": "Activate new portfolios",
 			"delete_removed_portfolios": "Delete removed portfolios",
+			"deactivate_removed_portfolios": "Deactivate removed portfolios",
 			"service_temporarily_unavailable.value": "Display service temporarily unavailable message",
 			"service_unavailable_reason": "Service unavailablity display message",
 			"service_unavailable_date": "Display unavailable message from date",

@@ -14,6 +14,11 @@ export class Options {
     { code: 'param', desc: 'Parameter' },
     { code: 'dynamic', desc: 'Dynamic' }
   ]; 
+  deactivate: Option[] = [
+    { code: 'deactivate_all', desc: 'Deactivate' },
+    { code: 'keep_active_all', desc: 'Keep all active' },
+    { code: 'keep_active_perpetual', desc: 'Keep perpetual access portfolios active' }
+  ]; 
 }
 
 export interface Option {
