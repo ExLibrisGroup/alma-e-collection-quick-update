@@ -23,7 +23,7 @@
 			"activation_date": "Activation Date",
 			"expected_activation_date": "Expected Date",
 			"is_selective.value": "We subscribe to only some titles in the collection",
-			"is_suppressed_from_cdi": "Do not show as full text in CDI even if active in Alma",
+			"do_not_show_as_full_text_available_in_cdi_even_if_active_in_alma": "Do not show as full text in CDI even if active in Alma",
 			"public_note" : "Public Note",
 			"public_access_model.value" : "Public Access Model"
 
