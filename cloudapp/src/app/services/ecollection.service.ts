@@ -46,7 +46,7 @@ export class EcollectionService {
       }
     }
     ['activation_date', 'expected_activation_date', 'service_unavailable_date', 'service_unavailable_until_date', 'active_from_date', 'active_until_date'].forEach(f=>this.formatDate(src, f));
-    ['is_suppressed_from_cdi', 'activate_new_portfolios', 'delete_removed_portfolios'].forEach(f=>this.formatBoolean(src, f));
+    ['do_not_show_as_full_text_available_in_cdi_even_if_active_in_alma', 'activate_new_portfolios', 'delete_removed_portfolios'].forEach(f=>this.formatBoolean(src, f));
     this.removeDeactivateIfNeeded(orig, src, actions);
     return Object.assign(orig, src);
   }

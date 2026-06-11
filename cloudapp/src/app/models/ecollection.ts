@@ -14,7 +14,7 @@ export class ECollection {
   activation_date: string = "";
   expected_activation_date: string = "";
   is_selective: Value = new Value();
-  is_suppressed_from_cdi: boolean = null;
+  do_not_show_as_full_text_available_in_cdi_even_if_active_in_alma: boolean = null;
 }
 
 export class Value {
