@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Options } from '../models/options';
 import { Observable, iif, of, forkJoin } from 'rxjs';
 import { CloudAppRestService, Request } from '@exlibris/exl-cloudapp-angular-lib';
-import { tap, switchMap, map } from 'rxjs/operators';
+import { tap, switchMap, map, catchError } from 'rxjs/operators';
 import { camelCase, cloneDeep } from 'lodash';
 import { CodeTable, IntegrationProfile, Library, License } from '../models/alma';
 
@@ -80,6 +80,22 @@ export class OptionsService {
           map(() => this._options)
         )
     )
+  }
+
+  getIncludeMemberDefaultResolverProxyOption(): Observable<boolean> {
+    return this.restService.call<boolean | { value: boolean }>(`/conf/includeMemberDefaultResolverProxyOption`)
+      .pipe(
+        map(result => {
+          if (typeof result === 'boolean') {
+            return result;
+          }
+          if (result && typeof result === 'object') {
+            return Boolean((result as any).value ?? (result as any).boolean ?? false);
+          }
+          return false;
+        }),
+        catchError(() => of(false))
+      );
   }
 
   /** Use Alma default parameters to retrieve all items in pages */

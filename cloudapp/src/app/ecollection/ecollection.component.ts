@@ -26,6 +26,7 @@ export class EcollectionComponent implements OnInit {
   actions: FormActions = {service: {}, collection: {}};
   ids: string[];
   results: Results;
+  showMemberDefaultProxyOption = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,12 +39,16 @@ export class EcollectionComponent implements OnInit {
   ngOnInit() {
     this.ids = this.route.snapshot.params['ids'].split(',');
     this.loading = true;
-    this.optionsService.options.pipe(
+    forkJoin([
+      this.optionsService.options,
+      this.optionsService.getIncludeMemberDefaultResolverProxyOption()
+    ]).pipe(
       finalize(() => this.loading = false)
     )
     .subscribe({
-      next: results => {
-        this.options = results;
+      next: ([options, memberDefaultProxyEnabled]) => {
+        this.options = options;
+        this.showMemberDefaultProxyOption = memberDefaultProxyEnabled;
         this.form = FormGroupUtil.toFormGroup(new ECollection());
         this.form.setValidators(this.validateForm);
         for (let control in this.form.controls) {
@@ -53,7 +58,7 @@ export class EcollectionComponent implements OnInit {
         this.serviceForm.setValidators(this.validateForm);
         for (let control in this.serviceForm.controls) {
           this.serviceForm.controls[control].disable();
-        }        
+        }
       },
       error: e => this.alert.error('An error occurred: ', e.message)
     });
