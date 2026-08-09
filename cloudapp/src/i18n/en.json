@@ -9,6 +9,7 @@
 		"Intro": "For each field you wish to update, select the action (clear, replace, etc.) and the value of the field.",
 		"FailureMessage": "ID {id} could not be updated: {message}",
 		"SuccessMessage": "ID {id} was successfully updated.",
+		"member_default": "Member Default Proxy",
 		"Fields": {
 			"internal_description": "Internal Description",
 			"authentication_note": "Authentication Note",
@@ -33,7 +34,7 @@
 			"public_description": "Public Description",
 			"authentication_note": "Authentication Note",
 			"proxy_enabled.value": "Proxy enabled",
-			"proxy": "Proxy Selected",			
+			"proxy": "Proxy Selected",
 			"activation_status":"Activation Status",
 			"activation_status.value":"Activation Status",
 			"activate_new_portfolios": "Activate new portfolios",
